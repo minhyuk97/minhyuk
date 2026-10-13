@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,7 +69,6 @@
 
         @keyframes shine { to { background-position: 200% center; } }
 
-        /* 로고 크기 축소 (28px -> 20px) */
         .title-yt-icon {
             width: 20px;
             height: 20px;
@@ -169,6 +169,8 @@
             transition: .25s ease;
             display: flex;
             flex-direction: column;
+            text-decoration: none;
+            color: inherit;
         }
         .card:hover { transform: translateY(-2px); border-color: var(--accent); }
         
@@ -209,7 +211,7 @@
     <div class="header-wrap">
         <header class="header">
             <div class="sub-title">AVENUE H</div>
-            <a href="https://www.youtube.com/@%EC%97%90%EB%B9%84%EB%89%B4%EC%97%90%EC%9D%B4%EC%B9%98_%EB%AF%BF%ED%98%81" target="_blank" rel="noopener noreferrer" class="header-title-link">
+            <a href="https://www.youtube.com/@%EC%97%90%EB%B9%84%EB%89%B4%EC%97%90%EC%9D%B4%EC%B9%98_%EB%AF%BC%ED%98%81" target="_blank" rel="noopener noreferrer" class="header-title-link">
                 <h1>
                     <svg class="title-yt-icon" viewBox="0 0 24 24">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -235,7 +237,7 @@
     </div>
 
     <div class="search-box">
-        <input type="text" id="search" placeholder="시그 검색...">
+        <input type="text" id="search" placeholder="시그 또는 팬페이지 검색...">
     </div>
 
     <div class="filters" id="categories">
@@ -247,12 +249,13 @@
         <button class="btn" data-filter="9천대">9천대</button>
         <button class="btn" data-filter="1만대">1만대</button>
         <button class="btn" data-filter="VIP">VIP</button>
+        <button class="btn" data-filter="팬페이지">팬페이지</button>
     </div>
 
     <div class="list" id="productList"></div>
 
     <footer>
-        Created by | <a href="https://www.youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA" target="_blank" rel="noopener noreferrer" class="footer-link">
+        Created by | <a href="https://youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA?si=KQDef_7gWL2iJyQv" target="_blank" rel="noopener noreferrer" class="footer-link">
             <svg class="yt-icon" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
             </svg>
@@ -262,6 +265,14 @@
 
     <script>
         const allSigs = [
+            /* 팬페이지 추가 */
+            { name: "쭈이쭈이🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCNZvxYomYrymwESVCxjofqA?si=DKpZ2wtkhe6jDO-r" },
+            { name: "찰지🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA?si=KQDef_7gWL2iJyQv" },
+            { name: "쩜🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCf8qVDVKWNCVu2AVG7H2UCg?si=RN4u7dxzCmeTXkzc" },
+            { name: "쮸압🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCu2gC5anV7YKEN-LyWBXXvA?si=smLTrMUfRmtoq1KA" },
+            
+
+            /* 기존 시그 리스트 */
             { name: "이쁜이", price: 5000, category: "5천대" },
             { name: "턱밑에서브이", price: 5010, category: "5천대" },
             { name: "고양이송", price: 5100, category: "5천대" },
@@ -396,15 +407,30 @@
                 const matchesFilter = (filter === 'all' || item.category === filter);
                 return matchesQuery && matchesFilter;
             })
-            .sort((a, b) => a.price - b.price)
+            .sort((a, b) => {
+                // 팬페이지가 상단에 오도록 정렬, 시그는 가격순 정렬
+                if (a.category === '팬페이지' && b.category !== '팬페이지') return -1;
+                if (a.category !== '팬페이지' && b.category === '팬페이지') return 1;
+                return (a.price || 0) - (b.price || 0);
+            })
             .forEach(item => {
-                list.innerHTML += `
-                <div class="card">
-                    <div class="info">
-                        <div class="name">${item.name}</div>
-                        <div class="price">₩${item.price.toLocaleString()}</div>
-                    </div>
-                </div>`;
+                if (item.category === '팬페이지') {
+                    list.innerHTML += `
+                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="card">
+                        <div class="info">
+                            <div class="name">${item.name}</div>
+                            <div class="price">${item.priceText}</div>
+                        </div>
+                    </a>`;
+                } else {
+                    list.innerHTML += `
+                    <div class="card">
+                        <div class="info">
+                            <div class="name">${item.name}</div>
+                            <div class="price">₩${item.price.toLocaleString()}</div>
+                        </div>
+                    </div>`;
+                }
             });
         }
 
@@ -426,3 +452,5 @@
     </script>
 </body>
 </html>
+
+```
