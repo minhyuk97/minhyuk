@@ -99,20 +99,13 @@
             font-size: 0.8rem;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .donate-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .donate-label {
-            font-weight: 700;
-            color: var(--accent);
-            font-size: 0.75rem;
-            min-width: 55px;
+            justify-content: space-between;
         }
 
         .donate-val {
@@ -120,14 +113,24 @@
             font-weight: 500;
         }
 
-        .donate-link {
+        /* 투네이션 바로가기 전체 영역을 버튼 링크처럼 처리 */
+        .donate-link-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
             color: var(--text);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            font-weight: 600;
+            font-weight: 500;
+            cursor: pointer;
         }
-        .donate-link:hover {
+        .donate-link-box:hover .donate-label {
             color: var(--accent);
+        }
+
+        .donate-label {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.75rem;
         }
 
         #theme-toggle { background: none; border: none; color: #777; font-size: .72rem; font-weight: 700; letter-spacing: .25em; cursor: pointer; padding: 0; }
@@ -186,15 +189,15 @@
         <button id="theme-toggle">◐</button>
     </div>
 
-    <!-- 수정된 정보 영역 ('계좌번호' 글자 삭제) -->
+    <!-- 계좌 및 투네이션 영역 (색상 통일 및 투네이션 텍스트 링크화) -->
     <div class="donate-box">
         <div class="donate-item">
             <span class="donate-val">카카오페이증권 02012732362</span>
         </div>
-        <div class="donate-item">
+        <a href="https://toon.at/donate/min3333" target="_blank" rel="noopener noreferrer" class="donate-link-box">
             <span class="donate-label">투네이션 바로가기</span>
-            <a href="https://toon.at/donate/min3333" target="_blank" rel="noopener noreferrer" class="donate-link">https://toon.at/donate/min3333</a>
-        </div>
+            <span class="donate-val">https://toon.at/donate/min3333</span>
+        </a>
     </div>
 
     <div class="search-box">
@@ -227,7 +230,7 @@
             { name: "모찌송", price: 5300, category: "5천대" },
             { name: "귀요미", price: 5400, category: "5천대" },
             { name: "오또카지", price: 5500, category: "5천대" },
-            { name: "외모쳌", price: 5800, category: "5천대" },
+            { name: "외모체크", price: 5800, category: "5천대" },
             { name: "뾱뾱이", price: 5900, category: "5천대" },
             { name: "키세스", price: 5600, category: "5천대" },
             { name: "킹받쥬", price: 6300, category: "6천대" },
