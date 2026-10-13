@@ -7,23 +7,25 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
-            --bg: #050505;
-            --text: #ffffff;
-            --accent: #2D7FF9;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --border: #333;
-            --price-text: #9fb8ff;
-            --info-bg: rgba(255, 255, 255, 0.03);
+            /* 다크 모드: 차콜 그레이 톤 */
+            --bg: #18191c;
+            --text: #f0f2f5;
+            --accent: #3b82f6;
+            --card-bg: #22242a;
+            --border: #333742;
+            --price-text: #a5c2ff;
+            --info-bg: #1e2026;
         }
 
         [data-theme='light'] {
-            --bg: #fafafa;
-            --text: #111111;
-            --accent: #2D7FF9;
+            /* 라이트 모드: 은은한 아이보리 톤 */
+            --bg: #fcfbf7;
+            --text: #2c2a29;
+            --accent: #2563eb;
             --card-bg: #ffffff;
-            --border: #ececec;
-            --price-text: #555555;
-            --info-bg: #f0f4f9;
+            --border: #e8e5de;
+            --price-text: #606060;
+            --info-bg: #f3f0e8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; transition: 0.3s; }
@@ -118,14 +120,12 @@
             cursor: pointer;
         }
 
-        /* 왼쪽 레이블(항목 이름)은 강조 컬러 통일 */
         .donate-label {
             font-weight: 700;
             color: var(--accent);
             font-size: 0.75rem;
         }
 
-        /* 오른쪽 값(계좌번호, 이동하기)은 기본 텍스트 색상 통일 */
         .donate-val {
             color: var(--text);
             font-weight: 500;
@@ -137,7 +137,7 @@
         .search-box { width: 100%; margin-bottom: 20px; }
         #search { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,.12); color: var(--text); padding: 14px 2px; outline: none; font-size: .95rem; }
         [data-theme='light'] #search { border-bottom: 1px solid rgba(0,0,0,.12); }
-        #search:focus { border-bottom-color: #2D7FF9; }
+        #search:focus { border-bottom-color: var(--accent); }
         
         .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: center; }
         .btn { padding: 8px 16px; background: var(--card-bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; cursor: pointer; font-size: 0.75rem; font-weight: 600; }
@@ -155,7 +155,7 @@
             display: flex;
             flex-direction: column;
         }
-        .card:hover { transform: translateY(-2px); border-color: #2D7FF9; }
+        .card:hover { transform: translateY(-2px); border-color: var(--accent); }
         
         .card::after {
             content: "";
@@ -172,7 +172,7 @@
         .name { font-size: .92rem; font-weight: 600; line-height: 1.45; color: var(--text); }
         .price { color: var(--price-text); font-size: .82rem; font-weight: 700; letter-spacing: .05em; }
         
-        footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
+        footer { text-align: center; padding: 40px 20px; color: #888; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
     </style>
 </head>
 <body>
@@ -187,7 +187,7 @@
         <button id="theme-toggle">◐</button>
     </div>
 
-    <!-- 후원 영역 (색상 및 스타일 통일) -->
+    <!-- 후원 영역 -->
     <div class="donate-box">
         <div class="donate-item" onclick="copyAccount()">
             <span class="donate-label">카카오페이증권</span>
