@@ -173,8 +173,21 @@
         .price { color: var(--price-text); font-size: .82rem; font-weight: 700; letter-spacing: .05em; }
         
         footer { text-align: center; padding: 40px 20px; color: #888; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
-        .footer-link { color: inherit; text-decoration: none; font-weight: 600; }
+        .footer-link {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
         .footer-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+        .yt-icon {
+            width: 16px;
+            height: 16px;
+            fill: #FF0000;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -219,7 +232,12 @@
     <div class="list" id="productList"></div>
 
     <footer>
-        Created by | <a href="https://www.youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA" target="_blank" rel="noopener noreferrer" class="footer-link">김찰지🐟</a>
+        Created by | <a href="https://www.youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <svg class="yt-icon" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            김찰지🐟
+        </a>
     </footer>
 
     <script>
