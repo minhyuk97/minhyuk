@@ -29,6 +29,16 @@
 
         .header-wrap { display: flex; justify-content: space-between; align-items: flex-start; margin: 40px 0 35px; }
         
+        /* 상단 소제목 (AVENUE H) 스타일 */
+        .sub-title {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            color: var(--accent);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
         .header h1 {
             display: flex;
             align-items: center;
@@ -125,8 +135,9 @@
 <body>
     <div class="header-wrap">
         <header class="header">
-           <h1 onclick="resetAll()">
-               MIN HYUK
+            <div class="sub-title">AVENUE H</div>
+            <h1 onclick="resetAll()">
+                MIN HYUK
                 <span class="live">LIVE</span>
             </h1>
         </header>
@@ -150,7 +161,7 @@
 
     <div class="list" id="productList"></div>
 
-    <footer>Created by | 김찰지🐟</footer>
+    <footer>Created by | 김찰지🐟 </footer>
 
     <script>
         const allSigs = [
