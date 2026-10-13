@@ -42,6 +42,12 @@
             text-transform: uppercase;
         }
 
+        .header-title-link {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
         .header h1 {
             display: flex;
             align-items: center;
@@ -61,6 +67,14 @@
         }
 
         @keyframes shine { to { background-position: 200% center; } }
+
+        .title-yt-icon {
+            width: 28px;
+            height: 28px;
+            fill: #FF0000;
+            margin-right: 2px;
+            flex-shrink: 0;
+        }
 
         .live {
             position: relative;
@@ -194,10 +208,15 @@
     <div class="header-wrap">
         <header class="header">
             <div class="sub-title">AVENUE H</div>
-            <h1 onclick="resetAll()">
-                MIN HYUK
-                <span class="live">LIVE</span>
-            </h1>
+            <a href="https://www.youtube.com/@%EC%97%90%EB%B9%84%EB%89%B4%EC%97%90%EC%9D%B4%EC%B9%98_%EB%AF%BC%ED%98%81" target="_blank" rel="noopener noreferrer" class="header-title-link">
+                <h1>
+                    <svg class="title-yt-icon" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    MIN HYUK
+                    <span class="live">LIVE</span>
+                </h1>
+            </a>
         </header>
         <button id="theme-toggle">◐</button>
     </div>
