@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>민혁 갠방 시그 리스트</title>
+    <title>민혁 갠방 리스트</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
@@ -148,7 +148,7 @@
     <div class="header-wrap">
         <header class="header">
          <h1 onclick="resetAll()">
-    민혁 갠방 시그 리스트
+   MIN HYUK
     <span class="live">LIVE</span>
 </h1>
         </header>
@@ -172,7 +172,7 @@
 
     <div class="list" id="productList"></div>
 
-    <footer>민혁 갠방 시그 리스트</footer>
+    <footer>Created by | OCEAN LABEL 김찰지</footer>
 
     <script>
         const allSigs = [
@@ -300,7 +300,17 @@
                 const matchesFilter = (filter === 'all' || item.category === filter);
                 return matchesQuery && matchesFilter;
             })
-         
+            .sort((a, b) => a.price - b.price)
+            .forEach(item => {
+                list.innerHTML += `
+                <div class="card">
+                    <div class="info">
+                 <div class="name" style="${item.name === 'ALL I WANNA DO (우석)' || item.name === '내일에서 기다릴게 (지구)' ? 'font-size:0.78rem;' : ''}">${item.name}</div>
+                        <div class="price">₩${item.price.toLocaleString()}</div>
+                    </div>
+                </div>`;
+            });
+        }
 
         function resetAll() {
             document.getElementById('search').value = '';
