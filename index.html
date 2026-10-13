@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -265,14 +264,13 @@
 
     <script>
         const allSigs = [
-            /* 팬페이지 추가 */
+            /* 팬페이지 목록 */
             { name: "쭈이쭈이🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCNZvxYomYrymwESVCxjofqA?si=DKpZ2wtkhe6jDO-r" },
             { name: "찰지🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA?si=KQDef_7gWL2iJyQv" },
             { name: "쩜🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCf8qVDVKWNCVu2AVG7H2UCg?si=RN4u7dxzCmeTXkzc" },
             { name: "쮸압🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCu2gC5anV7YKEN-LyWBXXvA?si=smLTrMUfRmtoq1KA" },
-            
 
-            /* 기존 시그 리스트 */
+            /* 시그 리스트 */
             { name: "이쁜이", price: 5000, category: "5천대" },
             { name: "턱밑에서브이", price: 5010, category: "5천대" },
             { name: "고양이송", price: 5100, category: "5천대" },
@@ -404,15 +402,18 @@
             
             allSigs.filter(item => {
                 const matchesQuery = item.name.toLowerCase().includes(query);
-                const matchesFilter = (filter === 'all' || item.category === filter);
+                
+                // ALL 선택 시 팬페이지 카테고리는 제외
+                let matchesFilter = false;
+                if (filter === 'all') {
+                    matchesFilter = (item.category !== '팬페이지');
+                } else {
+                    matchesFilter = (item.category === filter);
+                }
+                
                 return matchesQuery && matchesFilter;
             })
-            .sort((a, b) => {
-                // 팬페이지가 상단에 오도록 정렬, 시그는 가격순 정렬
-                if (a.category === '팬페이지' && b.category !== '팬페이지') return -1;
-                if (a.category !== '팬페이지' && b.category === '팬페이지') return 1;
-                return (a.price || 0) - (b.price || 0);
-            })
+            .sort((a, b) => (a.price || 0) - (b.price || 0))
             .forEach(item => {
                 if (item.category === '팬페이지') {
                     list.innerHTML += `
@@ -452,5 +453,3 @@
     </script>
 </body>
 </html>
-
-```
