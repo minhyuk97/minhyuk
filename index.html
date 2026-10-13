@@ -99,38 +99,36 @@
             font-size: 0.8rem;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .donate-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            cursor: pointer;
         }
 
-        .donate-val {
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        /* 투네이션 바로가기 전체 영역을 버튼 링크처럼 처리 */
         .donate-link-box {
             display: flex;
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
+            color: inherit;
             cursor: pointer;
         }
-        .donate-link-box:hover .donate-label {
-            color: var(--accent);
-        }
 
+        /* 왼쪽 레이블(항목 이름)은 강조 컬러 통일 */
         .donate-label {
             font-weight: 700;
             color: var(--accent);
             font-size: 0.75rem;
+        }
+
+        /* 오른쪽 값(계좌번호, 이동하기)은 기본 텍스트 색상 통일 */
+        .donate-val {
+            color: var(--text);
+            font-weight: 500;
         }
 
         #theme-toggle { background: none; border: none; color: #777; font-size: .72rem; font-weight: 700; letter-spacing: .25em; cursor: pointer; padding: 0; }
@@ -189,14 +187,15 @@
         <button id="theme-toggle">◐</button>
     </div>
 
-    <!-- 계좌 및 투네이션 영역 (색상 통일 및 투네이션 텍스트 링크화) -->
+    <!-- 후원 영역 (색상 및 스타일 통일) -->
     <div class="donate-box">
-        <div class="donate-item">
-            <span class="donate-val">카카오페이증권 02012732362</span>
+        <div class="donate-item" onclick="copyAccount()">
+            <span class="donate-label">카카오페이증권</span>
+            <span class="donate-val" id="accountNum">02012732362 (복사하기)</span>
         </div>
         <a href="https://toon.at/donate/min3333" target="_blank" rel="noopener noreferrer" class="donate-link-box">
             <span class="donate-label">투네이션 바로가기</span>
-            <span class="donate-val">https://toon.at/donate/min3333</span>
+            <span class="donate-val">이동하기 ↗</span>
         </a>
     </div>
 
@@ -323,6 +322,20 @@
             { name: "호텔파티", price: 8600, category: "8천대" },
             { name: "VIP", price: 100000, category: "VIP" }
         ];
+
+        // 계좌번호 복사 함수
+        function copyAccount() {
+            const account = "02012732362";
+            navigator.clipboard.writeText(account).then(() => {
+                const el = document.getElementById('accountNum');
+                el.innerText = "계좌번호 복사 완료! ✓";
+                setTimeout(() => {
+                    el.innerText = "02012732362 (복사하기)";
+                }, 2000);
+            }).catch(err => {
+                alert("복사에 실패했습니다.");
+            });
+        }
 
         document.getElementById('theme-toggle').addEventListener('click', () => {
             const doc = document.documentElement;
