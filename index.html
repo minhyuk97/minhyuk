@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>민혁 갠방시그 리스트</title>
+    <title>민혁 갠방 시그 리스트</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
@@ -13,6 +13,7 @@
             --card-bg: rgba(255, 255, 255, 0.05);
             --border: #333;
             --price-text: #9fb8ff;
+            --info-bg: rgba(255, 255, 255, 0.03);
         }
 
         [data-theme='light'] {
@@ -22,18 +23,18 @@
             --card-bg: #ffffff;
             --border: #ececec;
             --price-text: #555555;
+            --info-bg: #f0f4f9;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; transition: 0.3s; }
         body { background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; max-width: 600px; margin: auto; }
 
-        .header-wrap { display: flex; justify-content: space-between; align-items: flex-start; margin: 40px 0 35px; }
+        .header-wrap { display: flex; justify-content: space-between; align-items: flex-start; margin: 40px 0 20px; }
         
-        /* 상단 소제목 (AVENUE H) 스타일 */
         .sub-title {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 800;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.2em;
             color: var(--accent);
             margin-bottom: 4px;
             text-transform: uppercase;
@@ -42,10 +43,10 @@
         .header h1 {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 2.5rem;
+            gap: 10px;
+            font-size: 2rem;
             font-weight: 900;
-            letter-spacing: -2px;
+            letter-spacing: -1.5px;
             text-transform: uppercase;
             cursor: pointer;
             line-height: 1;
@@ -63,9 +64,9 @@
             position: relative;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: .65rem;
-            letter-spacing: .25em;
+            gap: 6px;
+            font-size: .6rem;
+            letter-spacing: .2em;
             font-weight: 700;
             color: var(--accent);
             -webkit-text-fill-color: var(--accent);
@@ -74,8 +75,8 @@
 
         .live::before {
             content: "";
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             background: var(--accent);
             box-shadow: 0 0 0 rgba(45,127,249,.6);
@@ -86,6 +87,47 @@
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45,127,249,.6); }
             70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(45,127,249,0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45,127,249,0); }
+        }
+
+        /* 계좌 및 후원 영역 */
+        .donate-box {
+            background: var(--info-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 25px;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .donate-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .donate-label {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.75rem;
+            min-width: 55px;
+        }
+
+        .donate-val {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .donate-link {
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 600;
+        }
+        .donate-link:hover {
+            color: var(--accent);
         }
 
         #theme-toggle { background: none; border: none; color: #777; font-size: .72rem; font-weight: 700; letter-spacing: .25em; cursor: pointer; padding: 0; }
@@ -144,6 +186,17 @@
         <button id="theme-toggle">◐</button>
     </div>
 
+    <!-- 수정된 정보 영역 ('계좌번호' 글자 삭제) -->
+    <div class="donate-box">
+        <div class="donate-item">
+            <span class="donate-val">카카오페이증권 02012732362</span>
+        </div>
+        <div class="donate-item">
+            <span class="donate-label">투네이션 바로가기</span>
+            <a href="https://toon.at/donate/min3333" target="_blank" rel="noopener noreferrer" class="donate-link">https://toon.at/donate/min3333</a>
+        </div>
+    </div>
+
     <div class="search-box">
         <input type="text" id="search" placeholder="시그 검색...">
     </div>
@@ -161,7 +214,7 @@
 
     <div class="list" id="productList"></div>
 
-    <footer>Created by | OCEAN LABEL 김찰지</footer>
+    <footer>Created by | 김찰지🐟</footer>
 
     <script>
         const allSigs = [
@@ -243,6 +296,7 @@
             { name: "우유", price: 11200, category: "1만대" },
             { name: "계엄령", price: 13800, category: "1만대" },
             { name: "랜덤", price: 10000, category: "1만대" },
+            { name: "간절한한마디", price: 10000, category: "1만대" },
             { name: "바람디져", price: 11900, category: "1만대" },
             { name: "흡연", price: 11900, category: "1만대" },
             { name: "홀드업", price: 12000, category: "1만대" },
