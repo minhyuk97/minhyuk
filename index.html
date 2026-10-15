@@ -170,6 +170,7 @@
             flex-direction: column;
             text-decoration: none;
             color: inherit;
+            cursor: pointer;
         }
         .card:hover { transform: translateY(-2px); border-color: var(--accent); }
         
@@ -185,8 +186,23 @@
         .card:hover::after { opacity: 1; }
 
         .info { padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; flex-grow: 1; text-align: center; }
-        .name { font-size: .92rem; font-weight: 600; line-height: 1.45; color: var(--text); }
+        .name { 
+            font-size: .92rem; 
+            font-weight: 600; 
+            line-height: 1.45; 
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
         .price { color: var(--price-text); font-size: .82rem; font-weight: 700; letter-spacing: .05em; }
+
+        .video-tag {
+            font-size: 0.7rem;
+            margin-left: 2px;
+            vertical-align: middle;
+        }
         
         footer { text-align: center; padding: 40px 20px; color: #888; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
         .footer-link {
@@ -236,7 +252,7 @@
     </div>
 
     <div class="search-box">
-        <input type="text" id="search" placeholder="시그 검색...">
+        <input type="text" id="search" placeholder="시그 또는 팬페이지 검색...">
     </div>
 
     <div class="filters" id="categories">
@@ -265,116 +281,115 @@
     <script>
         const allSigs = [
             /* 팬페이지 목록 */
-            { name: "쭈이쭈이🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCNZvxYomYrymwESVCxjofqA?si=DKpZ2wtkhe6jDO-r" },
-            { name: "찰지🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA?si=KQDef_7gWL2iJyQv" },
-            { name: "쩜🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCf8qVDVKWNCVu2AVG7H2UCg?si=RN4u7dxzCmeTXkzc" },
-            { name: "쮸압🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCu2gC5anV7YKEN-LyWBXXvA?si=smLTrMUfRmtoq1KA" },
+            { name: "쭈이쭈이🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCNZvxYomYrymwESVCxjofqA?si=DKpZ2wtkhe6jDO-r", isExternal: true },
+            { name: "찰지🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA?si=KQDef_7gWL2iJyQv", isExternal: true },
+            { name: "쩜🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCf8qVDVKWNCVu2AVG7H2UCg?si=RN4u7dxzCmeTXkzc", isExternal: true },
+            { name: "쮸압🔥", priceText: "YouTube ↗", category: "팬페이지", url: "https://youtube.com/channel/UCu2gC5anV7YKEN-LyWBXXvA?si=smLTrMUfRmtoq1KA", isExternal: true },
 
-            /* 시그 리스트 */
-            { name: "이쁜이", price: 5000, category: "5천대" },
-            { name: "턱밑에서브이", price: 5010, category: "5천대" },
-            { name: "고양이송", price: 5100, category: "5천대" },
-            { name: "아웅다웅", price: 12500, category: "1만대" },
-            { name: "햄토리", price: 5030, category: "5천대" },
-            { name: "이라이라", price: 5200, category: "5천대" },
-            { name: "모찌송", price: 5300, category: "5천대" },
-            { name: "귀요미", price: 5400, category: "5천대" },
-            { name: "오또카지", price: 5500, category: "5천대" },
-            { name: "외모체크", price: 5800, category: "5천대" },
-            { name: "뾱뾱이", price: 5900, category: "5천대" },
-            { name: "키세스", price: 5600, category: "5천대" },
-            { name: "킹받쥬", price: 6300, category: "6천대" },
-            { name: "솜사탕", price: 6400, category: "6천대" },
-            { name: "덴파덴파", price: 5060, category: "5천대" },
-            { name: "사랑받을준비완료", price: 5040, category: "5천대" },
-            { name: "테디베어", price: 5020, category: "5천대" },
-            { name: "삐끼삐끼", price: 6800, category: "6천대" },
-            { name: "빛을따라서", price: 5050, category: "5천대" },
-            { name: "너랑사귈래", price: 7200, category: "7천대" },
-            { name: "리와인드", price: 5070, category: "5천대" },
-            { name: "나의첫사랑에게", price: 5110, category: "5천대" },
-            { name: "트월킹덕", price: 11700, category: "1만대" },
-            { name: "또치또치", price: 7700, category: "7천대" },
-            { name: "같은곳에서", price: 5120, category: "5천대" },
-            { name: "도마도마", price: 5700, category: "5천대" },
-            { name: "사쿠란보", price: 6000, category: "6천대" },
-            { name: "퍼킹뱅어", price: 6100, category: "6천대" },
-            { name: "핫해", price: 6200, category: "6천대" },
-            { name: "레몬탱", price: 5080, category: "5천대" },
-            { name: "포켓몬스터", price: 6500, category: "6천대" },
-            { name: "러브쉐이크", price: 6700, category: "6천대" },
-            { name: "우리집", price: 6900, category: "6천대" },
-            { name: "폼미쳣다", price: 7000, category: "7천대" },
-            { name: "진압해", price: 7100, category: "7천대" },
-            { name: "팬서비스", price: 7300, category: "7천대" },
-            { name: "패스트카", price: 9600, category: "9천대" },
-            { name: "버터플라이", price: 8000, category: "8천대" },
-            { name: "콩나물", price: 8200, category: "8천대" },
-            { name: "미국가있어", price: 8500, category: "8천대" },
-            { name: "웨이백홈", price: 8900, category: "8천대" },
-            { name: "캐치캐치", price: 9100, category: "9천대" },
-            { name: "우리집", price: 10500, category: "1만대" },
-            { name: "사기캐", price: 13700, category: "1만대" },
-            { name: "너뿐이야", price: 11100, category: "1만대" },
-            { name: "부처님손바닥", price: 7600, category: "7천대" },
-            { name: "너와의모든지금", price: 8700, category: "8천대" },
-            { name: "내가S넌N", price: 9200, category: "9천대" },
-            { name: "벌룬인러브", price: 9300, category: "9천대" },
-            { name: "결국너야", price: 9400, category: "9천대" },
-            { name: "할것", price: 9500, category: "9천대" },
-            { name: "러브샷", price: 8800, category: "8천대" },
-            { name: "우치다", price: 11000, category: "1만대" },
-            { name: "날라리", price: 7800, category: "7천대" },
-            { name: "홀리몰리", price: 10700, category: "1만대" },
-            { name: "슈퍼그럼요", price: 11300, category: "1만대" },
-            { name: "첫만남", price: 8400, category: "8천대" },
-            { name: "여우", price: 12100, category: "1만대" },
-            { name: "티라미수케잌", price: 10800, category: "1만대" },
-            { name: "핑크레이디", price: 10400, category: "1만대" },
-            { name: "아헤가오", price: 12200, category: "1만대" },
-            { name: "체온", price: 10900, category: "1만대" },
-            { name: "꽃", price: 13200, category: "1만대" },
-            { name: "버터플라이", price: 13300, category: "1만대" },
-            { name: "사마우코이", price: 9900, category: "9천대" },
-            { name: "뛰어", price: 12900, category: "1만대" },
-            { name: "물만난광어", price: 11500, category: "1만대" },
-            { name: "원샷", price: 9000, category: "9천대" },
-            { name: "할리우드액션", price: 8100, category: "8천대" },
-            { name: "이꾸욧", price: 7900, category: "7천대" },
-            { name: "제로투", price: 7400, category: "7천대" },
-            { name: "오빠가알려줄게", price: 7500, category: "7천대" },
-            { name: "헨타이", price: 8300, category: "8천대" },
-            { name: "엉큰녀", price: 13000, category: "1만대" },
-            { name: "몸매", price: 11400, category: "1만대" },
-            { name: "우유", price: 11200, category: "1만대" },
-            { name: "계엄령", price: 13800, category: "1만대" },
-            { name: "랜덤", price: 10000, category: "1만대" },
-            { name: "흡연", price: 11900, category: "1만대" },
-            { name: "금연", price: 12000, category: "1만대" },
-            { name: "뱅뱅뱅", price: 11800, category: "1만대" },
-            { name: "몽타주", price: 12300, category: "1만대" },
-            { name: "길티", price: 12600, category: "1만대" },
-            { name: "꼬마선장", price: 10600, category: "1만대" },
-            { name: "불도저", price: 12400, category: "1만대" },
-            { name: "광우스키", price: 11600, category: "1만대" },
-            { name: "살이있네", price: 10100, category: "1만대" },
-            { name: "촉촉착착", price: 10200, category: "1만대" },
-            { name: "케이춤", price: 9700, category: "9천대" },
-            { name: "마티니", price: 9800, category: "9천대" },
-            { name: "애즈업", price: 13100, category: "1만대" },
-            { name: "레드레드", price: 12700, category: "1만대" },
-            { name: "크로우즈제로", price: 12800, category: "1만대" },
-            { name: "시바레스코", price: 13900, category: "1만대" },
-            { name: "널떠중", price: 5090, category: "5천대" },
-            { name: "루나솔라", price: 13400, category: "1만대" },
-            { name: "무한성", price: 13500, category: "1만대" },
-            { name: "백갑숙도", price: 10300, category: "1만대" },
-            { name: "지코토닉", price: 13600, category: "1만대" },
-            { name: "호텔파티", price: 8600, category: "8천대" },
-            { name: "VIP", price: 100000, category: "VIP" }
-        ];
+/* 시그 리스트 */
+const sigList = [
+    { name: "이쁜이", price: 5000, category: "5천대", url: "https://youtu.be/5x_ehBrMvUA?si=EXLXBe4zA1eiycBx", hasVideo: true },
+    { name: "턱밑에서브이", price: 5010, category: "5천대", url: "https://youtube.com/shorts/7m5TEy8SyiE?si=akW5v7xpVZhLGdNS", hasVideo: true },
+    { name: "고양이송", price: 5100, category: "5천대", url: "https://youtube.com/shorts/Kt_LKKfhMC0?si=3TUZSJPm14pYwg6P", hasVideo: true },
+    { name: "아웅다웅", price: 12500, category: "1만대" },
+    { name: "햄토리", price: 5030, category: "5천대", url: "https://youtube.com/shorts/FHzvpH7I-HA?si=cOt50Db417rZ2e94", hasVideo: true },
+    { name: "이라이라", price: 5200, category: "5천대" },
+    { name: "모찌송", price: 5300, category: "5천대", url: "https://youtu.be/5x_ehBrMvUA?si=EXLXBe4zA1eiycBx", hasVideo: true },
+    { name: "귀요미", price: 5400, category: "5천대" },
+    { name: "오또카지", price: 5500, category: "5천대" },
+    { name: "외모체크", price: 5800, category: "5천대", url: "https://youtube.com/shorts/YSjkfaFAsKU?si=WVr258Ixt7GE_8BB", hasVideo: true },
+    { name: "뾱뾱이", price: 5900, category: "5천대" },
+    { name: "키세스", price: 5600, category: "5천대", url: "https://youtube.com/shorts/yX7OPwsrKCQ?si=NemGW2rL94Hp9BS3", hasVideo: true },
+    { name: "킹받쥬", price: 6300, category: "6천대" },
+    { name: "솜사탕", price: 6400, category: "6천대", url: "https://youtube.com/shorts/H2L3S7Xotug?si=e2eMv0OlvrSSfTNT", hasVideo: true },
+    { name: "덴파덴파", price: 5060, category: "5천대" },
+    { name: "사랑받을준비완료", price: 5040, category: "5천대", url: "https://youtube.com/shorts/UAW_TWUy0nI?si=miNEI63XFbKCvMie", hasVideo: true },
+    { name: "테디베어", price: 5020, category: "5천대" },
+    { name: "삐끼삐끼", price: 6800, category: "6천대" },
+    { name: "빛을따라서", price: 5050, category: "5천대" },
+    { name: "나랑사귈래", price: 7200, category: "7천대", url: "https://youtube.com/shorts/L0AOBAJQH00?si=Bf067CGNzc5s2PCx", hasVideo: true },
+    { name: "리와인드", price: 5070, category: "5천대" },
+    { name: "나의첫사랑에게", price: 5110, category: "5천대" },
+    { name: "트월킹덕", price: 11700, category: "1만대" },
+    { name: "또치또치", price: 7700, category: "7천대" },
+    { name: "같은곳에서", price: 5120, category: "5천대" },
+    { name: "도마도마", price: 5700, category: "5천대", url: "https://youtube.com/shorts/i2jhiZFhfvA?si=HWnDDqtpeuG-IcnV", hasVideo: true },
+    { name: "사쿠란보", price: 6000, category: "6천대" },
+    { name: "퍼킹뱅어", price: 6100, category: "6천대", url: "https://youtube.com/shorts/nylqR-OVBOM?si=TzTeGf7xYqS4NYQN", hasVideo: true },
+    { name: "핫해", price: 6200, category: "6천대", url: "https://youtube.com/shorts/JUflueFpZSA?si=J9Td0CFDIiIJwUpZ", hasVideo: true },
+    { name: "레몬탱", price: 5080, category: "5천대" },
+    { name: "포켓몬스터", price: 6500, category: "6천대" },
+    { name: "러브쉐이크", price: 6700, category: "6천대", url: "https://youtu.be/lZT3QIBEWsg?si=pk_H5wEgxD2MTEUr", hasVideo: true },
+    { name: "우리집", price: 6900, category: "6천대", url: "https://youtube.com/shorts/XckzKYw6CrU?si=f3c0uRw1mcPCduwC", hasVideo: true },
+    { name: "폼미쳣다", price: 7000, category: "7천대", url: "https://youtube.com/shorts/FF-1B0swDGI?si=GhWvzNy6pQZ8qd2j", hasVideo: true },
+    { name: "진압해", price: 7100, category: "7천대", url: "https://youtube.com/shorts/XwoC54U44f8?si=1ErimEWQFMFV0_zy", hasVideo: true },
+    { name: "팬서비스", price: 7300, category: "7천대", url: "https://youtube.com/shorts/LES3_XrURLU?si=n0x26_23vsQlQc3r", hasVideo: true },
+    { name: "패스트카", price: 9600, category: "9천대", url: "https://youtube.com/shorts/VOdzj0VWa34?si=ZieUZHbetWLpZz2p", hasVideo: true },
+    { name: "버터플라이", price: 8000, category: "8천대", url: "https://youtube.com/shorts/PUP4dGAbA4s?si=2y7axYvUwCYdTvAf", hasVideo: true },
+    { name: "콩나물", price: 8200, category: "8천대" },
+    { name: "미국가있어", price: 8500, category: "8천대" },
+    { name: "웨이백홈", price: 8900, category: "8천대" },
+    { name: "캐치캐치", price: 9100, category: "9천대", url: "https://youtube.com/shorts/AOUA1sqqun4?si=Sb-IF7A7LU63Z-f5", hasVideo: true },
+    { name: "사기캐", price: 13700, category: "1만대" },
+    { name: "너뿐이야", price: 11100, category: "1만대", url: "https://youtube.com/shorts/D7yqmR61tN0?si=q4bQOVrI7S3l6ct2", hasVideo: true },
+    { name: "부처님손바닥", price: 7600, category: "7천대" },
+    { name: "너와의모든지금", price: 8700, category: "8천대", url: "https://youtube.com/shorts/xbeuFsdvhNI?si=ky43gTpgF3iwOge5", hasVideo: true },
+    { name: "내가S넌N", price: 9200, category: "9천대", url: "https://youtube.com/shorts/KgkxxUif9QA?si=x31dXM4SRpY1846h", hasVideo: true },
+    { name: "벌룬인러브", price: 9300, category: "9천대", url: "https://youtube.com/shorts/De15fKWn5yk?si=ilGzQhJlj6DroGKJ", hasVideo: true },
+    { name: "결국너야", price: 9400, category: "9천대", url: "https://youtube.com/shorts/5XGz0pgx6Xc?si=73YKUleyEoO7zyQ3", hasVideo: true },
+    { name: "할것", price: 9500, category: "9천대", url: "https://youtube.com/shorts/bQrEFBKESNg?si=io2wGM6ihCl--tHh", hasVideo: true },
+    { name: "러브샷", price: 8800, category: "8천대", url: "https://youtube.com/shorts/KJtyUwz0jhU?si=mB5LJ4FLX9wen4pq", hasVideo: true },
+    { name: "우치다", price: 11000, category: "1만대" },
+    { name: "날라리", price: 7800, category: "7천대", url: "https://youtube.com/shorts/7Gq8hTQECJ4?si=a4t7E8U1i5wOhoDD", hasVideo: true },
+    { name: "홀리몰리", price: 10700, category: "1만대" },
+    { name: "슈퍼그럼요", price: 11300, category: "1만대" },
+    { name: "첫만남", price: 8400, category: "8천대" },
+    { name: "여우", price: 12100, category: "1만대", url: "https://youtube.com/shorts/2tAbvSUzvlA?si=r__fxPKqdFchwYVs", hasVideo: true },
+    { name: "티라미수케잌", price: 10800, category: "1만대" },
+    { name: "핑크레이디", price: 10400, category: "1만대", url: "https://youtube.com/shorts/6xG4TzMhNUg?si=V7VnLLFK-hnNhje8", hasVideo: true },
+    { name: "아헤가오", price: 12200, category: "1만대" },
+    { name: "체온", price: 10900, category: "1만대", url: "https://youtube.com/shorts/ctC_NuChdqI?si=BA4IzV2Es2ifWC2B", hasVideo: true },
+    { name: "꽃", price: 13200, category: "1만대" },
+    { name: "사마우코이", price: 9900, category: "9천대", url: "https://youtube.com/shorts/U8dA9G6y07M?si=3HWLp0_LK8y_QYfM", hasVideo: true },
+    { name: "뛰어", price: 12900, category: "1만대" },
+    { name: "물만난광어", price: 11500, category: "1만대" },
+    { name: "원샷", price: 9000, category: "9천대", url: "https://youtube.com/shorts/QiVYYTi1dkA?si=BJJgtIaJzkVxrMpR", hasVideo: true },
+    { name: "할리우드액션", price: 8100, category: "8천대", url: "https://youtube.com/shorts/_CLczefyNqM?si=gGuhg3slslUr-yvt", hasVideo: true },
+    { name: "이꾸욧", price: 7900, category: "7천대" },
+    { name: "제로투", price: 7400, category: "7천대" },
+    { name: "오빠가알려줄게", price: 7500, category: "7천대", url: "https://youtube.com/shorts/dN9okgUNv28?si=zf41_cV_DtyuPj_J", hasVideo: true },
+    { name: "헨타이", price: 8300, category: "8천대", url: "https://youtube.com/shorts/ksL18nNUP2w?si=fHGLEUYRF5px70lL", hasVideo: true },
+    { name: "엉큰녀", price: 13000, category: "1만대" },
+    { name: "몸매", price: 11400, category: "1만대" },
+    { name: "우유", price: 11200, category: "1만대" },
+    { name: "계엄령", price: 13800, category: "1만대", url: "https://youtube.com/shorts/zBLqRfMH6q4?si=8T3168FRodsXmZ-o", hasVideo: true },
+    { name: "랜덤", price: 10000, category: "1만대" },
+    { name: "흡연", price: 11900, category: "1만대" },
+    { name: "금연", price: 12000, category: "1만대" },
+    { name: "뱅뱅뱅", price: 11800, category: "1만대" },
+    { name: "몽타주", price: 12300, category: "1만대" },
+    { name: "길티", price: 12600, category: "1만대", url: "https://youtube.com/shorts/lxhI8UQYYZE?si=03pqKMNAE-AyG5Oc", hasVideo: true },
+    { name: "꼬마선장", price: 10600, category: "1만대", url: "https://youtube.com/shorts/XqZrjGUUgVA?si=jLBDg0rRe-8a9aIJ", hasVideo: true },
+    { name: "불도저", price: 12400, category: "1만대" },
+    { name: "광우스키", price: 11600, category: "1만대" },
+    { name: "살이있네", price: 10100, category: "1만대" },
+    { name: "촉촉착착", price: 10200, category: "1만대" },
+    { name: "케이춤", price: 9700, category: "9천대", url: "https://youtube.com/shorts/kRYcgryIjFE?si=oEm6yyu8ULO4LT7m", hasVideo: true },
+    { name: "마티니", price: 9800, category: "9천대", url: "https://youtube.com/shorts/Yg6HlCofAc0?si=3HCtH5HV7QxfKNXf", hasVideo: true },
+    { name: "애즈업", price: 13100, category: "1만대", url: "https://youtube.com/shorts/Db5sXXSWtao?si=8sCpRUBJLtSvla8V", hasVideo: true },
+    { name: "레드레드", price: 12700, category: "1만대", url: "https://youtube.com/shorts/Gi2XmZQYn2Y?si=kQz_hjVGiTT9isDY", hasVideo: true },
+    { name: "크로우즈제로", price: 12800, category: "1만대" },
+    { name: "시바레스코", price: 13900, category: "1만대", url: "https://youtube.com/shorts/BQV-r0FikFs?si=UewTWDibp3tLr5oV", hasVideo: true },
+    { name: "널떠중", price: 5090, category: "5천대", url: "https://youtube.com/shorts/-SpTKvZLNes?si=vsilM1AnGcyMXBuU", hasVideo: true },
+    { name: "루나솔라", price: 13400, category: "1만대", url: "https://youtube.com/shorts/SxUVI1DoEic?si=iW0GIdx5ZoEYYRfX", hasVideo: true },
+    { name: "무한성", price: 13500, category: "1만대" },
+    { name: "백갑숙도", price: 10300, category: "1만대", url: "https://youtube.com/shorts/KbkeUGNY_sw?si=vBwnzGlFIBABD2iF", hasVideo: true },
+    { name: "지코토닉", price: 13600, category: "1만대" },
+    { name: "호텔파티", price: 8600, category: "8천대", url: "https://youtube.com/shorts/MHy2y11pxd8?si=srVcut8RZm9447Av", hasVideo: true },
+    { name: "VIP", price: 100000, category: "VIP" }
+];
+    
 
-        // 계좌번호 복사 함수
         function copyAccount() {
             const account = "02012732362";
             navigator.clipboard.writeText(account).then(() => {
@@ -403,7 +418,6 @@
             allSigs.filter(item => {
                 const matchesQuery = item.name.toLowerCase().includes(query);
                 
-                // ALL 선택 시 팬페이지 카테고리는 제외
                 let matchesFilter = false;
                 if (filter === 'all') {
                     matchesFilter = (item.category !== '팬페이지');
@@ -415,12 +429,16 @@
             })
             .sort((a, b) => (a.price || 0) - (b.price || 0))
             .forEach(item => {
-                if (item.category === '팬페이지') {
+                const videoIcon = item.hasVideo ? ' 🎬' : '';
+                
+                if (item.isExternal || item.hasVideo) {
+                    const linkUrl = item.url;
+                    const priceDisplay = item.price ? `₩${item.price.toLocaleString()} ↗` : (item.priceText || "YouTube ↗");
                     list.innerHTML += `
-                    <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="card">
+                    <a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="card">
                         <div class="info">
-                            <div class="name">${item.name}</div>
-                            <div class="price">${item.priceText}</div>
+                            <div class="name">${item.name}<span class="video-tag">${videoIcon}</span></div>
+                            <div class="price">${priceDisplay}</div>
                         </div>
                     </a>`;
                 } else {
