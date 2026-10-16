@@ -1,8 +1,9 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 모바일 고정 설정 (user-scalable=no 및 maximum-scale=1.0 추가) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>민혁 갠방 시그 리스트</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
@@ -285,7 +286,7 @@
             { name: "리와인드", price: 5070, category: "5천대" },
             { name: "나의첫사랑에게", price: 5110, category: "5천대" },
             { name: "트월킹덕", price: 11700, category: "1만대" },
-             { name: "또치또치", price: 7700, category: "7천대", url: "https://youtube.com/shorts/Y0dZ8qcSqs4?si=TZ6vPffySm8sz-BC", hasVideo: true},
+            { name: "또치또치", price: 7700, category: "7천대", url: "https://youtube.com/shorts/Y0dZ8qcSqs4?si=TZ6vPffySm8sz-BC", hasVideo: true},
             { name: "같은곳에서", price: 5120, category: "5천대" },
             { name: "도마도마", price: 5700, category: "5천대", url: "https://youtube.com/shorts/i2jhiZFhfvA?si=HWnDDqtpeuG-IcnV", hasVideo: true },
             { name: "사쿠란보", price: 6000, category: "6천대", url: "https://youtube.com/shorts/cNWLGMaKt1w?si=qPbdmWIhNpfx6iRx", hasVideo: true },
@@ -388,21 +389,21 @@
             const activeBtn = document.querySelector('.btn.active');
             const filter = activeBtn ? activeBtn.dataset.filter : 'all';
             const list = document.getElementById('productList');
-            list.innerHTML = '';                        
+            list.innerHTML = '';                    
             
             allSigs.filter(item => {
-                const matchesQuery = item.name.toLowerCase().includes(query);                                
+                const matchesQuery = item.name.toLowerCase().includes(query);                        
                 let matchesFilter = false;
                 if (filter === 'all') {
                     matchesFilter = (item.category !== '팬페이지');
                 } else {
                     matchesFilter = (item.category === filter);
-                }                                
+                }                        
                 return matchesQuery && matchesFilter;
             })
             .sort((a, b) => (a.price || 0) - (b.price || 0))
             .forEach(item => {
-                const videoIcon = item.hasVideo ? ' 🎬' : '';                                
+                const videoIcon = item.hasVideo ? ' 🎬' : '';                        
                 if (item.isExternal || item.hasVideo) {
                     const linkUrl = item.url;
                     const priceDisplay = item.price ? `₩${item.price.toLocaleString()} ↗` : (item.priceText || "YouTube ↗");
