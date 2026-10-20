@@ -2,13 +2,12 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <!-- 모바일 고정 설정 (user-scalable=no 및 maximum-scale=1.0 추가) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#18191c">
     <title>민혁 갠방 시그 리스트</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
-            /* 다크 모드: 차콜 그레이 톤 */
             --bg: #18191c;
             --text: #ffffff;
             --accent: #3b82f6;
@@ -18,7 +17,6 @@
             --info-bg: #1e2026;
         }
         [data-theme='light'] {
-            /* 라이트 모드: 은은한 아이보리 톤 */
             --bg: #fcfbf7;
             --text: #2c2a29;
             --accent: #2563eb;
@@ -29,172 +27,58 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; transition: 0.3s; }
         body { background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; max-width: 600px; margin: auto; }
-        .header-wrap { display: flex; justify-content: space-between; align-items: flex-start; margin: 40px 0 20px; }                
-        .sub-title {
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 0.2em;
-            color: var(--accent);
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-        .header-title-link {
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
+        .header-wrap { display: flex; justify-content: space-between; align-items: flex-start; margin: 40px 0 20px; }
+        .sub-title { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 4px; text-transform: uppercase; }
+        .header-title-link { text-decoration: none; display: inline-flex; align-items: center; }
         .header h1 {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: -1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            line-height: 1;
-            color: var(--text);
+            display: flex; align-items: center; gap: 8px; font-size: 2rem; font-weight: 900;
+            letter-spacing: -1.5px; text-transform: uppercase; cursor: pointer; line-height: 1; color: var(--text);
             background: linear-gradient(90deg, var(--text) 0%, var(--text) 35%, #7fb6ff 50%, var(--text) 65%, var(--text) 100%);
-            background-size: 250% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-size: 250% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: shine 7s linear infinite;
         }
         @keyframes shine { to { background-position: 200% center; } }
-        .title-yt-icon {
-            width: 20px;
-            height: 20px;
-            fill: #FF0000;
-            margin-right: 2px;
-            flex-shrink: 0;
-        }
-        .live {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: .6rem;
-            letter-spacing: .2em;
-            font-weight: 700;
-            color: var(--accent);
-            -webkit-text-fill-color: var(--accent);
-            opacity: .9;
-        }
-        .live::before {
-            content: "";
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 0 rgba(45,127,249,.6);
-            animation: livePulse 2s infinite;
-        }
+        .title-yt-icon { width: 20px; height: 20px; fill: #FF0000; margin-right: 2px; flex-shrink: 0; }
+        .live { position: relative; display: flex; align-items: center; gap: 6px; font-size: .6rem; letter-spacing: .2em; font-weight: 700; color: var(--accent); -webkit-text-fill-color: var(--accent); opacity: .9; }
+        .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 rgba(45,127,249,.6); animation: livePulse 2s infinite; }
         @keyframes livePulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45,127,249,.6); }
             70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(45,127,249,0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45,127,249,0); }
         }
-        /* 계좌 및 후원 영역 */
-        .donate-box {
-            background: var(--info-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin-bottom: 25px;
-            font-size: 0.8rem;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .donate-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-        }
-        .donate-link-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
-        .donate-label {
-            font-weight: 700;
-            color: var(--accent);
-            font-size: 0.75rem;
-        }
-        .donate-val {
-            color: var(--text);
-            font-weight: 500;
-        }
+        .donate-box { background: var(--info-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 25px; font-size: 0.8rem; display: flex; flex-direction: column; gap: 10px; }
+        .donate-item { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+        .donate-link-box { display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; cursor: pointer; }
+        .donate-label { font-weight: 700; color: var(--accent); font-size: 0.75rem; }
+        .donate-val { color: var(--text); font-weight: 500; }
         #theme-toggle { background: none; border: none; color: #777; font-size: .72rem; font-weight: 700; letter-spacing: .25em; cursor: pointer; padding: 0; }
-        #theme-toggle:hover { color: var(--text); }                
+        #theme-toggle:hover { color: var(--text); }
         .search-box { width: 100%; margin-bottom: 20px; }
         #search { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,.12); color: var(--text); padding: 14px 2px; outline: none; font-size: .95rem; }
         [data-theme='light'] #search { border-bottom: 1px solid rgba(0,0,0,.12); }
-        #search:focus { border-bottom-color: var(--accent); }                
+        #search:focus { border-bottom-color: var(--accent); }
         .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; justify-content: center; }
         .btn { padding: 8px 16px; background: var(--card-bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; cursor: pointer; font-size: 0.75rem; font-weight: 600; }
         .btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-        .list { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 40px; }                
-        .card {
-            position: relative;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            transition: .25s ease;
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
-        .card:hover { transform: translateY(-2px); border-color: var(--accent); }                
-        .card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(45,127,249,.12), transparent 60%);
-            opacity: 0;
-            transition: .35s;
-            pointer-events: none;
-        }
+        .list { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 40px; }
+        .card { position: relative; background: var(--card-bg); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: .25s ease; display: flex; flex-direction: column; text-decoration: none; color: inherit; cursor: pointer; }
+        .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+        .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(45,127,249,.12), transparent 60%); opacity: 0; transition: .35s; pointer-events: none; }
         .card:hover::after { opacity: 1; }
         .info { padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; flex-grow: 1; text-align: center; }
-        .name { 
-             font-size: .92rem; 
-             font-weight: 600; 
-             line-height: 1.45; 
-             color: var(--text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
+        .name { font-size: .92rem; font-weight: 600; line-height: 1.45; color: var(--text); display: flex; align-items: center; justify-content: center; gap: 4px; }
         .price { color: var(--price-text); font-size: .82rem; font-weight: 700; letter-spacing: .05em; }
-        .video-tag {
-            font-size: 0.7rem;
-            margin-left: 2px;
-            vertical-align: middle;
-        }                
+        .video-tag { display: inline-flex; align-items: center; justify-content: center; margin-left: 3px; color: #FF0000; font-size: .75rem; line-height: 1; vertical-align: middle; flex-shrink: 0; }
         footer { text-align: center; padding: 40px 20px; color: #888; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
-        .footer-link {
-            color: inherit;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
+        .footer-link { color: inherit; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
         .footer-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-        .yt-icon {
-            width: 16px;
-            height: 16px;
-            fill: #FF0000;
-            vertical-align: middle;
+        .yt-icon { width: 16px; height: 16px; fill: #FF0000; vertical-align: middle; }
+        @media (max-width: 360px) {
+            body { padding: 14px; }
+            .header h1 { font-size: 1.7rem; }
+            .btn { padding: 8px 12px; }
+            .list { gap: 9px; }
+            .info { padding: 10px 6px; }
         }
     </style>
 </head>
@@ -204,7 +88,7 @@
             <div class="sub-title">AVENUE H</div>
             <a href="https://www.youtube.com/@%EC%97%90%EB%B9%84%EB%89%B4%EC%97%90%EC%9D%B4%EC%B9%98_%EB%AF%BC%ED%98%81" target="_blank" rel="noopener noreferrer" class="header-title-link">
                 <h1>
-                    <svg class="title-yt-icon" viewBox="0 0 24 24">
+                    <svg class="title-yt-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                     MIN HYUK
@@ -212,12 +96,11 @@
                 </h1>
             </a>
         </header>
-        <button id="theme-toggle">◐</button>
+        <button id="theme-toggle" type="button" aria-label="테마 변경">◐</button>
     </div>
 
-    <!-- 후원 영역 -->
     <div class="donate-box">
-        <div class="donate-item" onclick="copyAccount()">
+        <div class="donate-item" id="account-copy" role="button" tabindex="0">
             <span class="donate-label">카카오페이증권</span>
             <span class="donate-val" id="accountNum">02012732362 (복사하기)</span>
         </div>
@@ -228,26 +111,26 @@
     </div>
 
     <div class="search-box">
-        <input type="text" id="search" placeholder="시그 검색...">
+        <input type="text" id="search" placeholder="시그 검색..." aria-label="시그 검색">
     </div>
 
     <div class="filters" id="categories">
-        <button class="btn active" data-filter="all">ALL</button>
-        <button class="btn" data-filter="5천대">5천대</button>
-        <button class="btn" data-filter="6천대">6천대</button>
-        <button class="btn" data-filter="7천대">7천대</button>
-        <button class="btn" data-filter="8천대">8천대</button>
-        <button class="btn" data-filter="9천대">9천대</button>
-        <button class="btn" data-filter="1만대">1만대</button>
-        <button class="btn" data-filter="VIP">VIP</button>
-        <button class="btn" data-filter="팬페이지">팬페이지</button>
+        <button class="btn active" data-filter="all" type="button">ALL</button>
+        <button class="btn" data-filter="5천대" type="button">5천대</button>
+        <button class="btn" data-filter="6천대" type="button">6천대</button>
+        <button class="btn" data-filter="7천대" type="button">7천대</button>
+        <button class="btn" data-filter="8천대" type="button">8천대</button>
+        <button class="btn" data-filter="9천대" type="button">9천대</button>
+        <button class="btn" data-filter="1만대" type="button">1만대</button>
+        <button class="btn" data-filter="VIP" type="button">VIP</button>
+        <button class="btn" data-filter="팬페이지" type="button">팬페이지</button>
     </div>
 
     <div class="list" id="productList"></div>
 
     <footer>
         Created by | <a href="https://youtube.com/channel/UCuv99_7n0L7xXGr-PQ7SsRA?si=KQDef_7gWL2iJyQv" target="_blank" rel="noopener noreferrer" class="footer-link">
-            <svg class="yt-icon" viewBox="0 0 24 24">
+            <svg class="yt-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
             </svg>
             김찰지🐟
@@ -263,7 +146,7 @@
         ];
 
         const sigList = [
-            { name: "이쁜이", price: 5000, category: "5천대" , url: "https://youtube.com/shorts/cWCYcbALD00?si=uUJ_LFJpz1S9XHHM", hasVideo: true },
+            { name: "이쁜이", price: 5000, category: "5천대", url: "https://youtube.com/shorts/cWCYcbALD00?si=uUJ_LFJpz1S9XHHM", hasVideo: true },
             { name: "턱밑에서브이", price: 5010, category: "5천대", url: "https://youtube.com/shorts/7m5TEy8SyiE?si=akW5v7xpVZhLGdNS", hasVideo: true },
             { name: "고양이송", price: 5100, category: "5천대", url: "https://youtube.com/shorts/Kt_LKKfhMC0?si=3TUZSJPm14pYwg6P", hasVideo: true },
             { name: "아웅다웅", price: 12500, category: "1만대" },
@@ -275,7 +158,7 @@
             { name: "외모체크", price: 5800, category: "5천대", url: "https://youtube.com/shorts/YSjkfaFAsKU?si=WVr258Ixt7GE_8BB", hasVideo: true },
             { name: "뾱뾱이", price: 5900, category: "5천대" },
             { name: "키세스", price: 5600, category: "5천대", url: "https://youtube.com/shorts/yX7OPwsrKCQ?si=NemGW2rL94Hp9BS3", hasVideo: true },
-            { name: "킹받쥬", price: 6300, category: "6천대", url: "https://youtube.com/shorts/jHav_wFJcmU?si=jd0ZOxBGJ57B5Y1z", hasVideo: true },,
+            { name: "킹받쥬", price: 6300, category: "6천대", url: "https://youtube.com/shorts/jHav_wFJcmU?si=jd0ZOxBGJ57B5Y1z", hasVideo: true },
             { name: "솜사탕", price: 6400, category: "6천대", url: "https://youtube.com/shorts/H2L3S7Xotug?si=e2eMv0OlvrSSfTNT", hasVideo: true },
             { name: "덴파덴파", price: 5060, category: "5천대" },
             { name: "사랑받을준비완료", price: 5040, category: "5천대", url: "https://youtube.com/shorts/M9mnAxaz04Q?si=DC783nZOQuwl0OD8", hasVideo: true },
@@ -286,7 +169,7 @@
             { name: "리와인드", price: 5070, category: "5천대" },
             { name: "나의첫사랑에게", price: 5110, category: "5천대" },
             { name: "트월킹덕", price: 11700, category: "1만대" },
-            { name: "또치또치", price: 7700, category: "7천대", url: "https://youtube.com/shorts/Y0dZ8qcSqs4?si=TZ6vPffySm8sz-BC", hasVideo: true},
+            { name: "또치또치", price: 7700, category: "7천대", url: "https://youtube.com/shorts/Y0dZ8qcSqs4?si=TZ6vPffySm8sz-BC", hasVideo: true },
             { name: "같은곳에서", price: 5120, category: "5천대" },
             { name: "도마도마", price: 5700, category: "5천대", url: "https://youtube.com/shorts/i2jhiZFhfvA?si=HWnDDqtpeuG-IcnV", hasVideo: true },
             { name: "사쿠란보", price: 6000, category: "6천대", url: "https://youtube.com/shorts/cNWLGMaKt1w?si=qPbdmWIhNpfx6iRx", hasVideo: true },
@@ -316,7 +199,7 @@
             { name: "러브샷", price: 8800, category: "8천대", url: "https://youtube.com/shorts/KJtyUwz0jhU?si=mB5LJ4FLX9wen4pq", hasVideo: true },
             { name: "우치다", price: 11000, category: "1만대" },
             { name: "날라리", price: 7800, category: "7천대", url: "https://youtube.com/shorts/7Gq8hTQECJ4?si=a4t7E8U1i5wOhoDD", hasVideo: true },
-            { name: "홀리몰리", price: 10700, category: "1만대", url: " https://youtube.com/shorts/4DToWPS0z40?si=WrePu8TEa7E66AS_", hasVideo: true },
+            { name: "홀리몰리", price: 10700, category: "1만대", url: "https://youtube.com/shorts/4DToWPS0z40?si=WrePu8TEa7E66AS_", hasVideo: true },
             { name: "슈퍼그럼요", price: 11300, category: "1만대" },
             { name: "첫만남", price: 8400, category: "8천대" },
             { name: "여우", price: 12100, category: "1만대", url: "https://youtube.com/shorts/2tAbvSUzvlA?si=r__fxPKqdFchwYVs", hasVideo: true },
@@ -333,7 +216,7 @@
             { name: "홀드업", price: 12010, category: "1만대" },
             { name: "원샷", price: 9000, category: "9천대", url: "https://youtube.com/shorts/QiVYYTi1dkA?si=BJJgtIaJzkVxrMpR", hasVideo: true },
             { name: "할리우드액션", price: 8100, category: "8천대", url: "https://youtube.com/shorts/_CLczefyNqM?si=gGuhg3slslUr-yvt", hasVideo: true },
-            { name: "이쿠욧", price: 7900, category: "7천대" , url: "https://youtube.com/shorts/K_4_LAkP0xc?si=JMaYyKO915YZYAZR", hasVideo: true },
+            { name: "이쿠욧", price: 7900, category: "7천대", url: "https://youtube.com/shorts/K_4_LAkP0xc?si=JMaYyKO915YZYAZR", hasVideo: true },
             { name: "제로투", price: 7400, category: "7천대" },
             { name: "오빠가알려줄게", price: 7500, category: "7천대", url: "https://youtube.com/shorts/dN9okgUNv28?si=zf41_cV_DtyuPj_J", hasVideo: true },
             { name: "헨타이", price: 8300, category: "8천대", url: "https://youtube.com/shorts/ksL18nNUP2w?si=fHGLEUYRF5px70lL", hasVideo: true },
@@ -359,7 +242,7 @@
             { name: "크로우즈제로", price: 12800, category: "1만대" },
             { name: "시바레스코", price: 13900, category: "1만대", url: "https://youtube.com/shorts/BQV-r0FikFs?si=UewTWDibp3tLr5oV", hasVideo: true },
             { name: "널떠올리는중", price: 5090, category: "5천대", url: "https://youtube.com/shorts/-SpTKvZLNes?si=vsilM1AnGcyMXBuU", hasVideo: true },
-            { name: "루니솔라", price: 13400, category: "1만대", url: " https://youtube.com/shorts/SxUVI1DoEic?si=iW0GIdx5ZoEYYRfX", hasVideo: true },
+            { name: "루니솔라", price: 13400, category: "1만대", url: "https://youtube.com/shorts/SxUVI1DoEic?si=iW0GIdx5ZoEYYRfX", hasVideo: true },
             { name: "무한성", price: 13500, category: "1만대" },
             { name: "백갑숙도", price: 10300, category: "1만대", url: "https://youtube.com/shorts/KbkeUGNY_sw?si=vBwnzGlFIBABD2iF", hasVideo: true },
             { name: "지코토닉", price: 13600, category: "1만대" },
@@ -369,73 +252,116 @@
 
         const allSigs = [...fanPages, ...sigList];
 
-        function copyAccount() {
+        async function copyAccount() {
             const account = "02012732362";
-            navigator.clipboard.writeText(account).then(() => {
-                const el = document.getElementById('accountNum');
-                el.innerText = "계좌번호 복사 완료! ✓";
-                setTimeout(() => {
-                    el.innerText = "02012732362 (복사하기)";
-                }, 2000);
-            }).catch(err => {
-                alert("복사에 실패했습니다.");
-            });
+            const el = document.getElementById("accountNum");
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(account);
+                } else {
+                    const temp = document.createElement("textarea");
+                    temp.value = account;
+                    temp.style.position = "fixed";
+                    temp.style.opacity = "0";
+                    document.body.appendChild(temp);
+                    temp.select();
+                    const copied = document.execCommand("copy");
+                    temp.remove();
+                    if (!copied) throw new Error("Copy failed");
+                }
+                el.textContent = "계좌번호 복사 완료! ✓";
+                setTimeout(() => { el.textContent = "02012732362 (복사하기)"; }, 2000);
+            } catch (err) {
+                alert("복사에 실패했습니다. 계좌번호를 직접 복사해 주세요: " + account);
+            }
         }
 
-        document.getElementById('theme-toggle').addEventListener('click', () => {
+        document.getElementById("account-copy").addEventListener("click", copyAccount);
+        document.getElementById("account-copy").addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                copyAccount();
+            }
+        });
+
+        document.getElementById("theme-toggle").addEventListener("click", () => {
             const doc = document.documentElement;
-            doc.setAttribute('data-theme', doc.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+            doc.setAttribute("data-theme", doc.getAttribute("data-theme") === "light" ? "dark" : "light");
         });
 
         function updateList() {
-            const query = document.getElementById('search').value.toLowerCase();
-            const activeBtn = document.querySelector('.btn.active');
-            const filter = activeBtn ? activeBtn.dataset.filter : 'all';
-            const list = document.getElementById('productList');
-            list.innerHTML = '';                    
-            
-            allSigs.filter(item => {
-                const matchesQuery = item.name.toLowerCase().includes(query);                        
-                let matchesFilter = false;
-                if (filter === 'all') {
-                    matchesFilter = (item.category !== '팬페이지');
-                } else {
-                    matchesFilter = (item.category === filter);
-                }                        
-                return matchesQuery && matchesFilter;
-            })
-            .sort((a, b) => (a.price || 0) - (b.price || 0))
-            .forEach(item => {
-                const videoIcon = item.hasVideo ? ' 🎬' : '';                        
+            const query = document.getElementById("search").value.trim().toLowerCase();
+            const activeBtn = document.querySelector(".btn.active");
+            const filter = activeBtn ? activeBtn.dataset.filter : "all";
+            const list = document.getElementById("productList");
+            list.innerHTML = "";
+
+            const filtered = allSigs
+                .filter(item => {
+                    const matchesQuery = item.name.toLowerCase().includes(query);
+                    const matchesFilter = filter === "all"
+                        ? item.category !== "팬페이지"
+                        : item.category === filter;
+                    return matchesQuery && matchesFilter;
+                })
+                .sort((a, b) => (a.price || 0) - (b.price || 0));
+
+            filtered.forEach(item => {
+                const card = document.createElement(item.isExternal || item.hasVideo ? "a" : "div");
+                card.className = "card";
+
                 if (item.isExternal || item.hasVideo) {
-                    const linkUrl = item.url;
-                    const priceDisplay = item.price ? `₩${item.price.toLocaleString()} ↗` : (item.priceText || "YouTube ↗");
-                    list.innerHTML += `
-                    <a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="card">
-                        <div class="info">
-                            <div class="name">${item.name}<span class="video-tag">${videoIcon}</span></div>
-                            <div class="price">${priceDisplay}</div>
-                        </div>
-                    </a>`;
-                } else {
-                    list.innerHTML += `
-                    <div class="card">
-                        <div class="info">
-                            <div class="name">${item.name}</div>
-                            <div class="price">₩${item.price.toLocaleString()}</div>
-                        </div>
-                    </div>`;
+                    card.href = item.url;
+                    card.target = "_blank";
+                    card.rel = "noopener noreferrer";
                 }
+
+                const info = document.createElement("div");
+                info.className = "info";
+
+                const name = document.createElement("div");
+                name.className = "name";
+                name.appendChild(document.createTextNode(item.name));
+
+                if (item.hasVideo) {
+                    const playIcon = document.createElement("span");
+                    playIcon.className = "video-tag";
+                    playIcon.textContent = "▶";
+                    playIcon.setAttribute("aria-label", "영상 보기");
+                    name.appendChild(playIcon);
+                }
+
+                const price = document.createElement("div");
+                price.className = "price";
+                price.textContent = item.price
+                    ? `₩${item.price.toLocaleString()}${item.hasVideo ? " ↗" : ""}`
+                    : (item.priceText || "");
+
+                info.append(name, price);
+                card.appendChild(info);
+                list.appendChild(card);
             });
+
+            if (filtered.length === 0) {
+                const empty = document.createElement("p");
+                empty.textContent = "검색 결과가 없습니다.";
+                empty.style.gridColumn = "1 / -1";
+                empty.style.textAlign = "center";
+                empty.style.padding = "24px 0";
+                empty.style.color = "var(--price-text)";
+                list.appendChild(empty);
+            }
         }
 
-        document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', (e) => {
-            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            updateList();
-        }));
+        document.querySelectorAll(".btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                updateList();
+            });
+        });
 
-        document.getElementById('search').addEventListener('input', updateList);
+        document.getElementById("search").addEventListener("input", updateList);
         updateList();
     </script>
 </body>
